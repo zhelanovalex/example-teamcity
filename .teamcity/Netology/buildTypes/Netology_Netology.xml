@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="43fd3b86-d1fb-4c4c-843c-ae3f0a3928d6" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2025.3/project-config.xsd">
+  <name>netology</name>
+  <description />
+  <settings>
+    <build-runners>
+      <runner id="Maven2" name="Maven1" type="Maven2">
+        <conditions>
+          <contains name="teamcity.build.branch" value="master" />
+        </conditions>
+        <parameters>
+          <param name="goals" value="clean deploy" />
+          <param name="localRepoScope" value="agent" />
+          <param name="maven.path" value="%teamcity.tool.maven.DEFAULT%" />
+          <param name="pomLocation" value="pom.xml" />
+          <param name="runnerArgs" value="-Dmaven.test.failure.ignore=true" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="userSettingsSelection" value="settings.xml" />
+        </parameters>
+      </runner>
+      <runner id="Maven2_1" name="Maven1_1" type="Maven2">
+        <conditions>
+          <does-not-contain name="teamcity.build.branch" value="master" />
+        </conditions>
+        <parameters>
+          <param name="goals" value="clean test" />
+          <param name="localRepoScope" value="agent" />
+          <param name="maven.path" value="%teamcity.tool.maven.DEFAULT%" />
+          <param name="pomLocation" value="pom.xml" />
+          <param name="runnerArgs" value="-Dmaven.test.failure.ignore=true" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="userSettingsSelection" value="settings.xml" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="Netology_HttpsGithubComZhelanovalexExampleTeamcityGit" />
+    </vcs-settings>
+    <build-extensions>
+      <extension id="perfmon" type="perfmon" />
+    </build-extensions>
+  </settings>
+</build-type>
+
